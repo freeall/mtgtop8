@@ -1,12 +1,17 @@
 var req = require('request');
 var cheerio = require('cheerio');
 var moment = require('moment');
+var iconv = require('iconv-lite');
+
+req = req.defaults({
+	encoding: null
+});
 
 var fetchDeck = function(eventId, deckId, callback) {
 	req('http://mtgtop8.com/event?e='+eventId+'&d='+deckId, function(err, res) {
 		if (err) return callback(err);
 
-		var $ = cheerio.load(res.body);
+		var $ = cheerio.load(iconv.decode(res.body, 'latin-1'));
 		var result = { 
 			player: $('table .chosen_tr [align=right] .topic').text().trim(),
 			result: $('table .chosen_tr [align=center]').text().trim(),
@@ -36,7 +41,7 @@ var fetchEventInfo = function(eventId, callback) {
 	req('http://mtgtop8.com/event?e='+eventId, function(err, res) {
 		if (err) return callback(err);
 
-		var $ = cheerio.load(res.body);
+		var $ = cheerio.load(iconv.decode(res.body, 'latin-1'));
 		
 		var players;
 		var date;
@@ -105,7 +110,7 @@ var fetchStandardEvents = function(page, callback) {
 
 		var result = [];
 
-		var $ = cheerio.load(res.body);
+		var $ = cheerio.load(iconv.decode(res.body, 'latin-1'));
 
 		var table = $('div div table tr td[width="40%"] > table').eq(1);
 		$('tr[height="30"]', table).each(function(i, div) {
