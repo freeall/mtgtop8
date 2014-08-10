@@ -1,0 +1,40 @@
+{
+  "name": "mtgtop8",
+  "version": "0.0.0",
+  "description": "Get events and decks data from mtgtop8.com",
+  "main": "index.js",
+  "keywords": [
+    "mtg",
+    "mtgtop8",
+    "top",
+    "event",
+    "events",
+    "deck",
+    "decks",
+    "card",
+    "cards",
+    "magic",
+    "the",
+    "gathering",
+    "mtgtop8.com"
+  ],
+  "dependencies": {
+    "cheerio": "^0.17.0",
+    "moment": "^2.8.1",
+    "request": "^2.39.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freeall/mtgtop8"
+  },
+  "author": "Tobias Baunbæk <freeall@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freeall/mtgtop8/issues"
+  },
+  "homepage": "https://github.com/freeall/mtgtop8"
+}
