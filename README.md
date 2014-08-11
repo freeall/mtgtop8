@@ -114,8 +114,14 @@ mtg.event(7956, function(err, event) {
 						name: 'Nykthos, Shrine to Nyx'
 					},
 					...
+				],
+				sideboard: [
+					{
+						count: 1,
+						name: 'Scavenging Ooze'
+					},
+					...
 				]
-			},
 			...
 		]
 	}
@@ -141,7 +147,14 @@ mtg.deck(7956, 245797, function(err, deck) {
 				name: 'Forest'
 			},
 			...
-		}
+		],
+		sideboard: [
+			{
+				count: 1,
+				name: 'Scavenging Ooze'
+			},
+			...
+		]
 	}
 */
 ```

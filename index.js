@@ -15,22 +15,31 @@ var fetchDeck = function(eventId, deckId, callback) {
 		var result = { 
 			player: $('table .chosen_tr [align=right] .topic').text().trim(),
 			result: $('table .chosen_tr [align=center]').text().trim(),
-			cards:[]
+			cards:[],
+			sideboard:[]
 		};
-		$('table table table').each(function(i, table) {
-			$('tr td div span', table).each(function(i, card) {
+
+		var addCards = function(arr) {
+			return function(i, card) {
 				var parent = $(card).parent();
 				$(card).remove();
 
 				var name = $(card).text().trim();
 				var count = parseInt($(parent).text().trim());
-				result.cards.push({
+				arr.push({
 					count: count,
 					name: name
 				});
-			});
+			}
+		};
+
+		var tables = $('table table table');
+		$('tr td div span', tables.last()).each(addCards(result.sideboard));
+		tables.slice(0,-1).each(function(i, table) {
+			$('tr td div span', table).each(addCards(result.cards));
 		});
 
+		// An check to make sure that it's being noticed if a deck is empty. Not too sure that the method above is always working for older data.
 		if (!result.cards.length) console.log('[mtgtop8] It appears that this deck is empty, should be investigated. .event('+eventId+','+deckId+')');
 
 		callback(null, result);
