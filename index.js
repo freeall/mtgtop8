@@ -104,6 +104,7 @@ var fetchEvent = function(eventId, callback) {
 				if (err) return callback(err);
 
 				deck.cards = deckFull.cards;
+				deck.sideboard = deckFull.sideboard;
 				decksFull.push(deck);
 				next();
 			});
