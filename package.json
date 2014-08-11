@@ -1,6 +1,6 @@
 {
   "name": "mtgtop8",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Get events and decks data from mtgtop8.com",
   "main": "index.js",
   "keywords": [
