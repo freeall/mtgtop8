@@ -38,7 +38,31 @@ mtg.standardEvents(function(err, events) {
 			id: 7956,
 			stars: 1,
 			bigstars: 0,
-			date: Tue Aug 05 2014 00:00:00 GMT+0200 (CEST) },
+			date: Tue Aug 05 2014 00:00:00 GMT+0200 (CEST)
+		},
+		...
+	]
+*/
+```
+
+### modernEvents([page,] callback)
+
+Fetches a list of moder events. The data is taken from this page http://mtgtop8.com/format?f=MO.
+
+Example
+``` js
+mtg.modernEvents(function(err, events) {
+	console.log(events);
+});
+/*
+	[
+		{
+			title: 'MTGO Competitive Standard Constructed League',
+	    id: 15369,
+	    stars: 1,
+	    bigstars: 0,
+	    date: 2017-04-25T22:00:00.000Z
+	  },
 		...
 	]
 */
