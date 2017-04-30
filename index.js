@@ -140,8 +140,38 @@ var fetchStandardEvents = function(page, callback) {
 	});
 };
 
+var fetchModernEvents = function(page, callback) {
+	if (arguments.length === 1) return fetchStandardEvents(1, page);
+
+	req.post('http://mtgtop8.com/format?f=MO&meta=52', { form:{ cp:page } }, function(err, res) {
+		if (err) return callback(err);
+
+		var result = [];
+
+		var $ = cheerio.load(iconv.decode(res.body, 'latin-1'));
+
+		var table = $('div div table tr td[width="40%"] > table').eq(1);
+		$('tr[height="30"]', table).each(function(i, div) {
+			var link = $('td a', div).attr('href');
+			var date = $('td[align="right"]', div).text();
+
+			result.push({
+				title: $('td a', div).text(),
+				id: parseInt(link.match(/e\=(\d*)/)[1]),
+				stars: $('td[width="15%"] img[src="graph/star.png"]', div).length,
+				bigstars: $('td[width="15%"] img[src="graph/bigstar.png"]', div).length,
+				date: moment(date, 'DD/MM/YY').toDate()
+			});
+		});
+
+		callback(null, result);
+	});
+};
+
+
 module.exports = {
 	standardEvents: fetchStandardEvents,
+	modernEvents: fetchModernEvents,
 	eventInfo: fetchEventInfo,
 	event: fetchEvent,
 	deck: fetchDeck
